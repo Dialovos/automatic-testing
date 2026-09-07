@@ -1,0 +1,11 @@
+version = 1
+timeout = 120
+artifacts_dir = "artifacts/testkit"
+
+[env]
+CI = "true"
+
+[[checks]]
+name = "kit-tests"
+command = ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"]
+tags = ["test", "integration"]

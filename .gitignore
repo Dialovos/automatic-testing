@@ -1,0 +1,17 @@
+.venv/
+.tools/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ruff_cache/
+build/
+dist/
+/artifacts/testkit/
+.env
+.env.*
+!.env.example
+!.env.sample
+node_modules/
+.pytest_cache/
+.coverage*
+htmlcov/

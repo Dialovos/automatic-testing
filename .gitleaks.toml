@@ -1,0 +1,4 @@
+title = "Automatic Testing Kit secret scanning"
+
+[extend]
+useDefault = true
