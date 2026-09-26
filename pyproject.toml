@@ -3,14 +3,11 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "automatic-testing-kit"
+name = "project-hub-testing-kit"
 version = "0.1.0"
 description = "Reusable, language-independent test command runner"
 requires-python = ">=3.11"
 dependencies = []
-
-[project.urls]
-Repository = "https://github.com/Dialovos/automatic-testing"
 
 [project.scripts]
 testkit = "testing_kit.cli:main"
