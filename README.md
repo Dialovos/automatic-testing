@@ -11,13 +11,10 @@ tested can use any language or test framework.
 
 ## Use it immediately
 
-Clone this repository, then point the runner at a project that already has a test
-command. `--command` must be the last option:
+From this directory, point the runner at a project that
+already has a test command. `--command` must be the last option:
 
 ```powershell
-git clone https://github.com/Dialovos/automatic-testing.git
-cd automatic-testing
-
 # Example: adopt it in an existing Rust project.
 python testkit.py init --project ../my-project --command cargo test --locked
 python testkit.py run --project ../my-project --dry-run
@@ -34,12 +31,12 @@ It does not install dependencies. Without `--command` or `--preset`, it writes
 a template that refuses to run until its placeholder command is replaced.
 
 For a command available from any directory, install the kit in a tooling
-environment from this repository's root:
+environment from the hub root:
 
 ```powershell
-python -m venv .venv
-.venv/Scripts/python -m pip install -e .
-.venv/Scripts/testkit run
+python -m venv projects/automatic-testing/.venv
+projects/automatic-testing/.venv/Scripts/python -m pip install -e ./projects/automatic-testing
+projects/automatic-testing/.venv/Scripts/testkit run --project ./projects/automatic-testing
 ```
 
 On Linux/macOS, use `.venv/bin/python` and `.venv/bin/testkit`. The direct
@@ -184,9 +181,10 @@ python -m unittest discover -s tests -v
 python testkit.py run
 ```
 
-The [CI workflow](.github/workflows/ci.yml) tests the kit on Windows and Linux
-with Python 3.11 and 3.12 and verifies the installed entry point. The repository
-contains the shared runner; consuming projects keep their own test configuration.
+The hub catalogs this project in `workspace.json`; the active workflow is at
+`../../.github/workflows/automatic-testing.yml`. It tests the kit on Windows and
+Linux and verifies the installed entry point. No other project's test setup is
+changed by adopting the kit itself.
 
 Implementation references: [Python subprocess](https://docs.python.org/3.11/library/subprocess.html),
 [Windows Job Objects](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects),
