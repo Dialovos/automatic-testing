@@ -27,10 +27,11 @@ evaluations or hardware-dependent checks under explicit tags such as `gpu` or
 `evaluation`. A check script should exit nonzero when its quality threshold is
 missed. The kit does not interpret model scores or provision GPUs.
 
-## Project Hub integration
+## Integrate with a workspace
 
-To adopt it in another hub project, first create and verify that project's
-`testing.toml`. Then replace its catalog commands with a call to the shared kit:
+First create and verify a target project's `testing.toml`. A workspace command
+catalog can then invoke the shared kit. For example, if this checkout and the
+target project are sibling directories:
 
 ```json
 "checks": [
@@ -38,18 +39,18 @@ To adopt it in another hub project, first create and verify that project's
 ]
 ```
 
-This example requires a `unit` tag in the target configuration. The hub invokes
-catalog commands from that project's directory, so no `--project` is necessary.
-Keep dependency installation in that project's root CI job. Catalog registration
-does not automatically install runtimes, dependencies, or add CI jobs.
+This example requires a `unit` tag and a catalog runner that resolves `{python}`
+to an installed Python interpreter. Run from the target project's directory so
+no `--project` is necessary. Keep dependency installation in the target project's
+CI job. Catalog registration does not install runtimes or dependencies.
 
 ## CI
 
-The same command works locally and in any CI provider. In a Project Hub job,
-install the target project's dependencies, then run from the hub root:
+The same command works locally and in any CI provider. Install the target
+project's dependencies, then invoke the shared checkout:
 
 ```text
-python projects/automatic-testing/testkit.py run --project projects/YOUR_PROJECT
+python /path/to/automatic-testing/testkit.py run --project /path/to/YOUR_PROJECT
 ```
 
 For an independent repository, provision a checkout of the kit at a reviewed
